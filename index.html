@@ -1,464 +1,688 @@
 <!DOCTYPE html>
-<html  >
+<html lang="es">
 <head>
-  <!-- Site made with Mobirise Website Builder v6.1.5, https://mobirise.com -->
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v6.1.5, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/gerencia-128x55.png" type="image/x-icon">
-  <meta name="description" content="">
-  
-  
-  <title>SGAAOC</title>
-  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/animatecss/animate.css">
-  <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/socicon/css/styles.css">
-  <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="preload" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
-  <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=Qq8lFF"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=Qq8lFF" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VISOR INTEGRAL EsSalud | Monitoreo en Tiempo Real</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --essalud-blue: #0056b3;
+      --essalud-blue-dark: #003d82;
+      --essalud-blue-light: #e6f0fa;
+      --essalud-red: #c8102e;
+      --essalud-gray: #f5f7fa;
+      --essalud-text: #1a1a1a;
+      --transition: all 0.25s ease;
+    }
 
-  
-  
-  
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
+      background: var(--essalud-gray);
+      color: var(--essalud-text);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== HEADER COMPACTO ===== */
+    .header {
+      background: linear-gradient(135deg, var(--essalud-blue) 0%, var(--essalud-blue-dark) 100%);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 86, 179, 0.2);
+      z-index: 100;
+      border-bottom: 3px solid var(--essalud-red);
+      height: 48px;
+    }
+
+    .header h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-badge {
+      background: rgba(255,255,255,0.15);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .status-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: #00d47a;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 122, 0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(0, 212, 122, 0); }
+    }
+
+    .datetime-badge {
+      background: rgba(255,255,255,0.2);
+      padding: 4px 14px;
+      border-radius: 8px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      border: 1px solid rgba(255,255,255,0.3);
+      min-width: 140px;
+    }
+
+    .datetime-badge .time {
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.5px;
+    }
+
+    .datetime-badge .date {
+      font-size: 0.7rem;
+      font-weight: 400;
+      opacity: 0.9;
+      text-transform: uppercase;
+    }
+
+    /* ===== BOTONES DE CONTROL ===== */
+    .controls {
+      padding: 8px 16px;
+      background: white;
+      border-bottom: 1px solid #d0d8e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-control {
+      padding: 6px 14px;
+      background: var(--essalud-blue);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      text-transform: uppercase;
+    }
+
+    .btn-control:hover {
+      background: var(--essalud-blue-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--essalud-blue);
+      color: var(--essalud-blue);
+    }
+
+    .btn-outline:hover {
+      background: var(--essalud-blue-light);
+    }
+
+    .panel-counter {
+      font-size: 0.85rem;
+      color: var(--essalud-text);
+      font-weight: 500;
+    }
+
+    /* ===== GRID DE VISORES ADAPTATIVO ===== */
+    .visor-container {
+      flex: 1;
+      padding: 6px;
+      overflow: hidden;
+    }
+
+    .visor {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 4px;
+      height: 100%;
+      width: 100%;
+    }
+
+    .cuadro {
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #d0d8e0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: 0 1px 4px rgba(0, 86, 179, 0.1);
+      position: relative;
+      min-height: 0;
+    }
+
+    .cuadro.hidden {
+      display: none;
+    }
+
+    .cuadro:hover {
+      border-color: var(--essalud-blue);
+      box-shadow: 0 4px 12px rgba(0, 86, 179, 0.25);
+      z-index: 10;
+    }
+
+    .cuadro::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--essalud-blue), var(--essalud-red));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .cuadro:hover::before {
+      opacity: 1;
+    }
+
+    .titulo-panel {
+      background: linear-gradient(135deg, var(--essalud-blue-light), white);
+      padding: 6px 10px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-align: center;
+      color: var(--essalud-blue-dark);
+      border-bottom: 1px solid #d0d8e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 36px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    .panel-actions {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 4px;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .cuadro:hover .panel-actions {
+      opacity: 1;
+    }
+
+    .btn-action-panel {
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1;
+      transition: var(--transition);
+      color: white;
+    }
+
+    .btn-maximize {
+      background: var(--essalud-blue);
+    }
+
+    .btn-maximize:hover {
+      background: var(--essalud-blue-dark);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .btn-close {
+      background: var(--essalud-red);
+    }
+
+    .btn-close:hover {
+      background: #a00d26;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .icon-badge {
+      width: 22px;
+      height: 22px;
+      background: var(--essalud-blue);
+      color: white;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .cuadro:nth-child(1) .icon-badge { background: #2196f3; }
+    .cuadro:nth-child(2) .icon-badge { background: #9c27b0; }
+    .cuadro:nth-child(3) .icon-badge { background: #f44336; }
+    .cuadro:nth-child(4) .icon-badge { background: #ff9800; }
+    .cuadro:nth-child(5) .icon-badge { background: #4caf50; }
+    .cuadro:nth-child(6) .icon-badge { background: #3f51b5; }
+    .cuadro:nth-child(7) .icon-badge { background: #e91e63; }
+    .cuadro:nth-child(8) .icon-badge { background: #00bcd4; }
+    .cuadro:nth-child(9) .icon-badge { background: #607d8b; }
+
+    .contenido-iframe {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #fafbfc;
+      min-height: 0;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: white;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1400px) {
+      .visor {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .header {
+        height: auto;
+        padding: 6px 12px;
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .header h1 {
+        font-size: 1.1rem;
+      }
+      
+      .header-info {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .datetime-badge {
+        min-width: auto;
+        flex: 1;
+        text-align: center;
+        align-items: center;
+      }
+      
+      .controls {
+        flex-direction: column;
+        padding: 6px 12px;
+        gap: 8px;
+      }
+      
+      .visor {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(9, auto);
+      }
+      
+      .visor-container {
+        padding: 4px;
+        overflow-y: auto;
+      }
+      
+      body {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+      }
+      
+      .cuadro {
+        min-height: 300px;
+      }
+    }
+
+    /* ===== ANIMACIONES DE ENTRADA ===== */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cuadro {
+      animation: slideIn 0.3s ease forwards;
+      opacity: 0;
+    }
+
+    .cuadro:nth-child(1) { animation-delay: 0.05s; }
+    .cuadro:nth-child(2) { animation-delay: 0.1s; }
+    .cuadro:nth-child(3) { animation-delay: 0.15s; }
+    .cuadro:nth-child(4) { animation-delay: 0.2s; }
+    .cuadro:nth-child(5) { animation-delay: 0.25s; }
+    .cuadro:nth-child(6) { animation-delay: 0.3s; }
+    .cuadro:nth-child(7) { animation-delay: 0.35s; }
+    .cuadro:nth-child(8) { animation-delay: 0.4s; }
+    .cuadro:nth-child(9) { animation-delay: 0.45s; }
+  </style>
 </head>
 <body>
-  
-  <section data-bs-version="5.1" class="menu menu3 cid-v8X7yY8prZ" once="menu" id="menu3-1z">
-    
-    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-        <div class="container-fluid">
-            <div class="navbar-brand">
-                
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-danger display-7" href="https://mobiri.se">Sub Gerencia de Atención al Asegurado en Otros Canales&nbsp;<br></a></span>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#article11-2p">Presupuesto</a></li><li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#article11-2g">EsSalud en Línea</a></li>
-                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#article11-2h">Línea 107</a></li>
-                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#article11-2i">Farmacia vecina</a>
-                    </li><li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#article11-2j">Supervisión y Monitoreo</a></li><li class="nav-item dropdown"><a class="nav-link link text-white text-primary dropdown-toggle display-4" href="index.html#article11-2j" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Manual de Registro</a><div class="dropdown-menu" aria-labelledby="dropdown-945"><a class="text-white text-primary dropdown-item display-4" href="assets/files/MANUAL-DEREGISTRODECANALDEATENCIONLINEA107.pdf" target="_blank">Registro Línea 107</a><a class="text-white text-primary show dropdown-item display-4" href="assets/files/MANUAL-DEREGISTRODEFARMACIAVECINA.pdf" target="_blank">Registro Farmacia Vecina<br></a></div></li></ul>
-                
-                
-            </div>
-        </div>
-    </nav>
-</section>
 
-<section data-bs-version="5.1" class="article11 cid-v8XlmQwFxZ" id="article11-2g">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-1"><strong>📊ESSALUD EN LINEA</strong></h3>
-                
-                
-            </div>
-        </div>
+  <!-- Header corporativo EsSalud -->
+  <header class="header">
+    <h1>ESSALUD EN LÍNEA</h1>
+    <div class="header-info">
+      <div class="status-badge">● EN LÍNEA</div>
+      <div class="datetime-badge">
+        <div class="time" id="currentTime">--:--:--</div>
+        <div class="date" id="currentDate">CARGANDO...</div>
+      </div>
     </div>
-</section>
+  </header>
 
-<section data-bs-version="5.1" class="clients2 cid-v8XaH9OkBP" id="clients2-22">
+  <!-- Controles -->
+  <div class="controls">
+    <button class="btn-control btn-outline" onclick="restaurarTodo()">↺ RESTAURAR TODOS</button>
+    <div class="panel-counter" id="panelCounter">9 PANELES VISIBLES</div>
+  </div>
 
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            
-            <div class="item features-without-image mb-5 col-12 col-md-4 active">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/favicon-material-rebrand-280x163.png" alt="Mobirise Website Builder" data-slide-to="0" data-bs-slide-to="0">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>PROGRAMACION DE CITAS</strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="https://www.appsheet.com/start/49b96127-d94f-4373-8d9a-52610c4cc7bd" target="_blank">Registro</a></div>
-                    </div>
-                </div>
-            </div><div class="item features-without-image mb-5 col-12 col-md-4">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/ssssss-1-280x163.png" alt="Mobirise Website Builder" data-slide-to="1" data-bs-slide-to="1">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>CITAS NO OTORGADAS</strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-warning display-4" href="https://lookerstudio.google.com/reporting/88d9dbe1-f5cb-4dd2-b96a-a6477896329e" target="_blank">Reporte</a></div>
-                    </div>
-                </div>
-            </div>
-            
+  <!-- Contenedor de visores -->
+  <div class="visor-container">
+    <div class="visor">
+      
+      <!-- Panel 1 -->
+      <div class="cuadro" id="panel-1" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">1</span>
+          ANEXOS EXTENDIDOS
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(1)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(1)" title="Ocultar panel">×</button>
+          </div>
         </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="clients2 cid-vaVMURMjPD" id="clients2-2n">
-
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            
-            
-            <div class="item features-without-image mb-5 col-12 col-md-4 active">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/favicon-material-rebrand-280x163.png" alt="Mobirise Website Builder" data-slide-to="1" data-bs-slide-to="1">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>CONSULTAS Y RECLAMOS</strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="https://www.appsheet.com/start/cbe7b36e-22ef-4adb-a96d-fa4b017a2fd3" target="_blank">Registro</a></div>
-                    </div>
-                </div>
-            </div><div class="item features-without-image mb-5 col-12 col-md-4">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/power-bi-logo-png-1-280x158.png" alt="Mobirise Website Builder" data-slide-to="2" data-bs-slide-to="2">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>CONSULTAS Y RECLAMOS</strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-success display-4" href="https://app.powerbi.com/view?r=eyJrIjoiZDFhODZjYWQtY2QyNC00NGFiLTg5OTgtZGYyMzA4ODZmN2M5IiwidCI6IjM0ZjMyNDE5LTFjMDUtNDc1Ni04OTZlLTQ1ZDYzMzcyNjU5YiIsImMiOjR9" target="_blank">Power Bi</a></div>
-                    </div>
-                </div>
-            </div><div class="item features-without-image mb-5 col-12 col-md-4">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/ssssss-1-280x163.png" alt="Mobirise Website Builder" data-bs-slide-to="0" data-slide-to="0">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>DERIVACIONES Y RESOLUCIONES DE RECLAMOS</strong><br><strong><br></strong>
-                        </h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-warning display-4" href="https://lookerstudio.google.com/reporting/518c85fd-3be0-4428-8b1f-d523f12b8451" target="_blank">Reporte</a></div>
-                    </div>
-                </div>
-            </div>
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="ANEXOS EXTENDIDOS"></iframe>
         </div>
-    </div>
-</section>
+      </div>
 
-<section data-bs-version="5.1" class="article11 cid-v8Xm0PEw4w" id="article11-2h">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-1"><strong>&nbsp;📊LINEA 107</strong></h3>
-                
-                
-            </div>
+      <!-- Panel 2 -->
+      <div class="cuadro" id="panel-2" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">2</span>
+          OPCION 1 - CITAS
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(2)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(2)" title="Ocultar panel">×</button>
+          </div>
         </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="clients2 cid-v8XezQtswx" id="clients2-2a">
-
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/favicon-material-rebrand-280x163.png" alt="Mobirise Website Builder">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>LLAMADAS LINEA 107</strong><br><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="https://www.appsheet.com/start/5d9a68c4-655e-40a7-b67c-6c0567f15a0e" target="_blank">Registro</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/222-280x163.png" alt="Mobirise Website Builder">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>REGISTRO LLAMADAS MAL INTENCIONADAS</strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-info display-4" href="https://www.appsheet.com/start/8cbe6f90-b16d-4d48-8e78-4a3e07215c99" target="_blank">Formulario</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/power-bi-logo-png-1-280x158.png" alt="Mobirise Website Builder">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>LINEA 107</strong><br><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-success display-4" href="https://app.powerbi.com/view?r=eyJrIjoiYWM1Y2ZkODAtOTlhNC00M2RjLWIxOGYtYzcwYmJhMjY1ZDhlIiwidCI6IjU4MDcxODY1LTM1NDItNDdkZS1hM2UxLWU2MDMyYTUxZDUwMSIsImMiOjl9" target="_blank">Power Bi</a></div>
-                    </div>
-                </div>
-            </div><div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/ssssss-1-280x163.png" alt="Mobirise Website Builder" data-slide-to="3" data-bs-slide-to="4">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>CENATE</strong><br><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-warning display-4" href="https://lookerstudio.google.com/reporting/1bd00eb8-e6e7-405a-b109-64bb115bf115" target="_blank">Reporte</a></div>
-                    </div>
-                </div>
-            </div>
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="OPCION 1 - CITAS"></iframe>
         </div>
-    </div>
-</section>
+      </div>
 
-<section data-bs-version="5.1" class="article11 cid-v8Xm8BehqF" id="article11-2i">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-1"><strong>📊FARMACIA VECINA</strong></h3>
-                
-                
-            </div>
+      <!-- Panel 3 -->
+      <div class="cuadro" id="panel-3" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">3</span>
+          OPCION 1.3 - REBAGLIATI
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(3)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(3)" title="Ocultar panel">×</button>
+          </div>
         </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="clients2 cid-v8XwxUzNFQ" id="clients2-2l">
-
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/favicon-material-rebrand-280x163.png" alt="Mobirise Website Builder">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>REGISTRO FARMACIA VECINA</strong><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="https://www.appsheet.com/start/6d594097-5f8d-4ee5-9df0-e2fb96640528" target="_blank">Registro<br></a></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/power-bi-logo-png-1-280x158.png" alt="Mobirise Website Builder">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>FARMACIA VECINA</strong><br><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-success display-4" href="https://adclichosting.com/wp-content/uploads/2021/10/Pagina-en-construccion.jpg" target="_blank">Power Bi</a></div>
-                    </div>
-                </div>
-            </div>
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="OPCION 1.3 - REBAGLIATI"></iframe>
         </div>
-    </div>
-</section>
+      </div>
 
-<section data-bs-version="5.1" class="article11 cid-v8Xm8QwMNy" id="article11-2j">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-1"><strong>📊SUPERVISION Y MONITOREO</strong></h3>
-                
-                
-            </div>
+      <!-- Panel 4 -->
+      <div class="cuadro" id="panel-4" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">4</span>
+          INTERCULTURAL
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(4)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(4)" title="Ocultar panel">×</button>
+          </div>
         </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="clients2 cid-v8XwLhQbQP" id="clients2-2m">
-
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/favicon-material-rebrand-280x163.png" alt="Mobirise Website Builder">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>INSTRUMENTO DE SUPERVISION</strong><br><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="https://www.appsheet.com/start/0c376793-cc50-4f4a-9292-4a59fcf73fb5" target="_blank">Formulario</a></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/ssssss-1-280x163.png" alt="Mobirise Website Builder" data-slide-to="3" data-bs-slide-to="4">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>MONITOREO DE SUPERVISION</strong><br><strong><br></strong><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-warning display-4" href="https://lookerstudio.google.com/reporting/2e36626d-b94c-4c81-aef0-007fa508649b" target="_blank">Reporte</a></div>
-                    </div>
-                </div>
-            </div><div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/mbr-280x183.png" alt="Mobirise Website Builder" data-slide-to="2" data-bs-slide-to="3">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>VIDEO GUIA</strong><br><strong><br></strong><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-warning display-4" href="https://docs.google.com/videos/d/1F1hp-Owv-DApbfiuxhfdJjr_A_nYZFPmZSdnE7Wr6h4/edit?usp=sharing" target="_blank">Ver</a></div>
-                    </div>
-                </div>
-            </div>
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="INTERCULTURAL"></iframe>
         </div>
-    </div>
-</section>
+      </div>
 
-<section data-bs-version="5.1" class="article11 cid-vaVT8pbwkZ" id="article11-2p">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-1"><strong>📊PRESUPUESTO</strong></h3>
-                
-                
-            </div>
+      <!-- Panel 5 -->
+      <div class="cuadro" id="panel-5" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">5</span>
+          OPCION 2 - REFERENCIA
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(5)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(5)" title="Ocultar panel">×</button>
+          </div>
         </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="clients2 cid-vaVVtkiLzw" id="clients2-2u">
-
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/sin20tc3adtulo-1-280x282.png" alt="Mobirise Website Builder">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>SEGUIMIENTO DE PRESUPUESTO</strong><br><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="https://app.powerbi.com/view?r=eyJrIjoiZDVhMjJlNjMtZDEwZS00ZDc0LWJjN2UtODg0NDk3MDU5YmNmIiwidCI6IjU4MDcxODY1LTM1NDItNDdkZS1hM2UxLWU2MDMyYTUxZDUwMSIsImMiOjl9" target="_blank">Registro</a></div>
-                    </div>
-                </div>
-            </div>
-            
-            
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="OPCION 2 - REFERENCIA"></iframe>
         </div>
-    </div>
-</section>
+      </div>
 
-<section data-bs-version="5.1" class="article11 cid-vaVVnbJdSO" id="article11-2t">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-1"><strong>📊MESA DE AYUDA</strong></h3>
-                
-                
-            </div>
+      <!-- Panel 6 -->
+      <div class="cuadro" id="panel-6" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">6</span>
+          OPCION 3 - INFORME
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(6)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(6)" title="Ocultar panel">×</button>
+          </div>
         </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="clients2 cid-vaVTbpGpmI" id="clients2-2q">
-
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="item features-without-image mb-5 col-12 col-md-3">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/favicon-material-rebrand-280x163.png" alt="Mobirise Website Builder">
-                    </div>
-                    <div class="card-box align-center">
-                        
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>SOLICITUDES DE SOPORTE TECNICO</strong><br><strong><br></strong></h5>
-                        
-                        <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="https://www.appsheet.com/start/557a5678-e27b-4699-a944-3a0f30edbd80" target="_blank">Registro</a></div>
-                    </div>
-                </div>
-            </div>
-            
-            
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="OPCION 3 - INFORME"></iframe>
         </div>
+      </div>
+
+      <!-- Panel 7 -->
+      <div class="cuadro" id="panel-7" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">7</span>
+          OPCION 5 - RECLAMO
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(7)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(7)" title="Ocultar panel">×</button>
+          </div>
+        </div>
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="OPCION 5 - RECLAMO"></iframe>
+        </div>
+      </div>
+
+      <!-- Panel 8 -->
+      <div class="cuadro" id="panel-8" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">8</span>
+          OPCION 4 - PACIENTES CRÓNICOS
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(8)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(8)" title="Ocultar panel">×</button>
+          </div>
+        </div>
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="OPCION 4 - PACIENTES CRÓNICOS"></iframe>
+        </div>
+      </div>
+
+      <!-- Panel 9 -->
+      <div class="cuadro" id="panel-9" data-src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml">
+        <div class="titulo-panel">
+          <span class="icon-badge">9</span>
+          COLA
+          <div class="panel-actions">
+            <button class="btn-action-panel btn-maximize" onclick="maximizarPanel(9)" title="Maximizar en nueva pestaña">⛶</button>
+            <button class="btn-action-panel btn-close" onclick="ocultarPanel(9)" title="Ocultar panel">×</button>
+          </div>
+        </div>
+        <div class="contenido-iframe">
+          <iframe src="http://172.20.60.10:8080/TContactaUno/faces/queues/MonitoreoPerl.xhtml" loading="lazy" title="COLA"></iframe>
+        </div>
+      </div>
+
     </div>
-</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com">Mobirise </a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  
-  
-  
- <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
-    <input name="animation" type="hidden">
-  </body>
+  </div>
+
+  <script>
+    // ===== ACTUALIZACIÓN DE FECHA Y HORA =====
+    function updateDateTime() {
+      const now = new Date();
+      
+      // Formato de hora: HH:MM:SS
+      const timeOptions = { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit', 
+        hour12: false 
+      };
+      
+      // Formato de fecha: Día, DD de Mes de YYYY
+      const dateOptions = { 
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: '2-digit' 
+      };
+      
+      const timeString = now.toLocaleTimeString('es-PE', timeOptions);
+      const dateString = now.toLocaleDateString('es-PE', dateOptions).toUpperCase();
+      
+      document.getElementById('currentTime').textContent = timeString;
+      document.getElementById('currentDate').textContent = dateString;
+    }
+    
+    // Actualizar inmediatamente y luego cada segundo
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    // Función para ocultar panel
+    function ocultarPanel(numero) {
+      const panel = document.getElementById(`panel-${numero}`);
+      if (panel) {
+        panel.classList.add('hidden');
+        actualizarContador();
+        ajustarGrid();
+      }
+    }
+
+    // Función para maximizar panel en nueva pestaña
+    function maximizarPanel(numero) {
+      const panel = document.getElementById(`panel-${numero}`);
+      if (panel) {
+        const url = panel.getAttribute('data-src');
+        window.open(url, `_blank_panel_${numero}`, 'noopener,noreferrer');
+      }
+    }
+
+    // Función para restaurar todos los paneles
+    function restaurarTodo() {
+      for (let i = 1; i <= 9; i++) {
+        const panel = document.getElementById(`panel-${i}`);
+        if (panel) {
+          panel.classList.remove('hidden');
+        }
+      }
+      actualizarContador();
+      ajustarGrid();
+    }
+
+    // Ajustar grid dinámicamente según paneles visibles
+    function ajustarGrid() {
+      const visor = document.querySelector('.visor');
+      const panelesVisibles = document.querySelectorAll('.cuadro:not(.hidden)').length;
+      
+      // Forzar 3x3 si hay 9 paneles visibles
+      if (panelesVisibles === 9) {
+        visor.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        visor.style.gridTemplateRows = 'repeat(3, 1fr)';
+      } else if (panelesVisibles <= 1) {
+        visor.style.gridTemplateColumns = '1fr';
+        visor.style.gridTemplateRows = '1fr';
+      } else if (panelesVisibles <= 4) {
+        visor.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        visor.style.gridTemplateRows = 'repeat(2, 1fr)';
+      } else if (panelesVisibles <= 6) {
+        visor.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        visor.style.gridTemplateRows = 'repeat(2, 1fr)';
+      } else {
+        visor.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        visor.style.gridTemplateRows = 'repeat(3, 1fr)';
+      }
+    }
+
+    // Actualizar contador de paneles visibles
+    function actualizarContador() {
+      const visibles = document.querySelectorAll('.cuadro:not(.hidden)').length;
+      document.getElementById('panelCounter').textContent = `${visibles} PANELES VISIBLES`;
+    }
+
+    // Manejo de errores en iframes
+    document.querySelectorAll('iframe').forEach(iframe => {
+      iframe.addEventListener('error', function() {
+        this.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#c8102e;font-weight:500;font-size:0.85rem;">⚠️ MÓDULO NO DISPONIBLE</div>';
+      });
+    });
+
+    // Inicializar
+    actualizarContador();
+    ajustarGrid();
+
+    // Ajustar grid al redimensionar ventana
+    window.addEventListener('resize', ajustarGrid);
+  </script>
+
+</body>
 </html>
